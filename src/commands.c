@@ -9,17 +9,16 @@ int do_cd(int argc, char** argv) {
   if (!validate_cd_argv(argc, argv))
     return -1;
 
-  else
-    return chdir(argv[1]);
+  else return chdir(argv[1]);
 }
 
 int do_pwd(int argc, char** argv) {
   if (!validate_pwd_argv(argc, argv))
     return -1;
 
-  char *cmd;
-  if((cmd = getcwd(NULL,8096))!=0){
-    printf("%s\n",cmd);
+  char *buffer= getcwd(buffer, 8096);
+  if((buffer)!=0){
+    printf("%s\n",buffer);
     return 0;
   }
   else return -1;

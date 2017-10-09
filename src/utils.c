@@ -6,27 +6,27 @@
 void mysh_parse_command(const char* command,
                         int *argc, char*** argv)
 {
-   int count = 0;
    char *cmdLineCopy = (char*)malloc(2048);
+   int stringNum = 0;
    strcpy(cmdLineCopy, command);
-   char* tok = strtok(cmdLineCopy, "' '\t\n");
+   char* token = strtok(cmdLineCopy, "' '\t\n");
    (*argv) = (char**) malloc(sizeof(char*)*1000);
-   (*argv)[count]=(char*)malloc(sizeof(char)*1000);
+   (*argv)[stringNum]=(char*)malloc(sizeof(char)*1000);
 
-   if(tok==NULL){
-	   *argc=1;
-	   strcpy((*argv)[0],"");
-	   return;
-   
+   if(token ==NULL){
+      *argc =1;
+      strcpy((*argv)[0],"");
+      return;
    }
-
-   while(tok !=NULL){
-	   strcpy((*argv)[count], tok);
-	   tok = strtok(NULL,"' ',\t\n");
-	   count++;
-	   (*argv)[count]=(char*)malloc(sizeof(char)*1000);
+   
+   while(token !=NULL){
+	   strcpy((*argv)[stringNum], token);
+	   token = strtok(NULL,"' ',\t\n");
+	   stringNum = stringNum +1;
+	   (*argv)[stringNum]=(char*)malloc(sizeof(char)*1000);
 }
 
-*argc= count;
+
+*argc= stringNum;
 free(cmdLineCopy);
 }
